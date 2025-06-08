@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_data t_data;
 
@@ -27,11 +28,13 @@ typedef struct s_data
     int         nb_must_eat;
     int         someone_died;
     pthread_mutex_t *forks;
-
+    pthread_t   checker_thread;
     t_philo     *philo;
 }               t_data;
 
 
 void	ft_putstr_fd(char *s, int fd);
+long long get_time(void);
+int count_eat(t_data *data);
 
 #endif

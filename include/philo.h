@@ -15,6 +15,7 @@ typedef struct s_philo
     int     id;
     long long last_meal;
     int       meal_eaten;
+    pthread_mutex_t meal_mutex;
     pthread_t   thread;
     t_data      *data;
 }       t_philo;
@@ -29,6 +30,7 @@ typedef struct s_data
     int         someone_died;
     pthread_mutex_t *forks;
     pthread_t   checker_thread;
+    pthread_mutex_t death_mutex;
     t_philo     *philo;
 }               t_data;
 
@@ -37,5 +39,6 @@ void	ft_putstr_fd(char *s, int fd);
 long long get_time(void);
 int count_eat(t_data *data);
 int parse_args(int ac, char **av, t_data *data);
+void free_all(t_data *data);
 
 #endif

@@ -36,5 +36,6 @@ typedef struct s_data
 void	ft_putstr_fd(char *s, int fd);
 long long get_time(void);
 int count_eat(t_data *data);
+int parse_args(int ac, char **av, t_data *data);
 
 #endif

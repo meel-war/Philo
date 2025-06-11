@@ -18,7 +18,7 @@ static int allocate_philo_forks(t_data *data)
     return(0);
 }
 
-static void init_philo_value(t_philo *philo, int i, t_data *data)
+static void init_philo_value(int i, t_data *data)
 {
         data->philo[i].id = i + 1;
         data->philo[i].left = i;
@@ -38,9 +38,10 @@ int initiate_philo(t_data *data)
     if(allocate_philo_forks(data) != 0)
         return(1);
     pthread_mutex_init(&data->death_mutex, NULL);
+    pthread_mutex_init(&data->full_meal_mutex, NULL);
     while(i < data->nb_philo)
     {
-        init_philo_value(data->philo, i, data);
+        init_philo_value(i, data);
         pthread_mutex_init(&data->forks[i], NULL);
         i++;
     }

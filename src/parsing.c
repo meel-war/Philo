@@ -57,7 +57,7 @@ static int check_args(int ac, char **av)
     return(0);
 }
 
-static void initalise_args(int ac, char **av, t_data *data)
+static void initialise_args(int ac, char **av, t_data *data)
 {
     data->nb_philo = philo_atoi(av[1]);
     data->time_to_die = philo_atoi(av[2]);
@@ -70,22 +70,25 @@ static void initalise_args(int ac, char **av, t_data *data)
     pthread_mutex_init(&data->death_mutex, NULL);
 }
 
-int parse_args(int ac, char **av, t_data *data)
+t_data *parse_args(int ac, char **av)
 {
+    t_data *data;
+
     data = malloc(sizeof(t_data));
     if(!data)
-        return(1);
+        return(NULL);
     memset(data, 0, sizeof(t_data));
-    if(check_args(av, ac))
+    if(check_args(ac, av))
     {
         free(data);
-        return(1);
+        return(NULL);
     }
     initialise_args(ac, av, data);
     if(data->nb_philo == -2 || data->time_to_die == -2 || data->time_to_eat == -2 || data->time_to_sleep == -2 || data->nb_must_eat == -2)
     {
         ft_putstr_fd("Error: one argument is too big\n", 2);
-        return(1);
+        free(data);
+        return(NULL);
     }
-    return(0);
+    return(data);
 }

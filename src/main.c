@@ -6,7 +6,8 @@ int main(int ac, char **av)
     int i;
 
     i = 0;
-    if (parse_args(ac, av, data) != 0)
+    data = parse_args(ac, av);
+    if (!data)
         return(1);
     if (initiate_philo(data) != 0)
         return(1);

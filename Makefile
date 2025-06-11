@@ -1,5 +1,5 @@
 NAME	= philo
-SRC		= src/main.c src/print_error.c
+SRC		= src/main.c src/count_eat.c src/initiate_philo.c src/link_thread.c src/parsing.c src/philo_loop.c utils/print_error.c utils/free_all.c utils/get_time.c
 OBJS	= $(SRC:.c=.o)
 CC		= cc
 FLAGS	= -Wall -Wextra -Werror -g

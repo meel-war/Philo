@@ -25,6 +25,7 @@ void free_all(t_data *data)
             free(data->philo);
         }
         pthread_mutex_destroy(&data->death_mutex);
+        pthread_mutex_destroy(&data->full_meal_mutex);
         free(data);
     }
 }

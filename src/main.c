@@ -3,9 +3,6 @@
 int main(int ac, char **av)
 {
     t_data *data;
-    int i;
-
-    i = 0;
     data = parse_args(ac, av);
     if (!data)
         return(1);

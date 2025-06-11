@@ -1,47 +1,5 @@
 #include "../include/philo.h"
 
-static int is_digit(char **av, int ac)
-{
-    int i;
-    int j;
-
-    j = 1;
-    while(j < ac)
-    {
-        i = 0;
-        if(av[j][0] == '\0')
-            return(0);
-        while(av[j][i])
-        {
-            if(av[j][i] < '0' || av[j][i] > '9')
-                return(0);
-            i++;
-        }
-        j++;
-    }
-    return(1);
-}
-
-static int philo_atoi(char *str)
-{
-    int result;
-    int i;
-    int before;
-
-    result = 0;
-    before = 0;
-    i = 0;
-    while(str[i] >= '0' && str[i] <= '9')
-    {
-        before = result;
-        result *= 10;
-        result += str[i] - '0';
-        if(before > result)
-            return(-2);
-        i++;
-    }
-    return(result);
-}
 static int check_args(int ac, char **av)
 {
     if(ac != 5 && ac != 6)
@@ -67,7 +25,26 @@ static void initialise_args(int ac, char **av, t_data *data)
         data->nb_must_eat = philo_atoi(av[5]);
     else
         data->nb_must_eat = -1;
-    pthread_mutex_init(&data->death_mutex, NULL);
+}
+
+static int validate_values(t_data *data)
+{
+    if (data->nb_philo <= 0)
+    {
+        ft_putstr_fd("Error: Number of philosophers must be positive\n", 2);
+        return(1);
+    }
+    if (data->time_to_die <= 0 || data->time_to_eat <= 0 || data->time_to_sleep <= 0)
+    {
+        ft_putstr_fd("Error: Time values must be positive\n", 2);
+        return(1);
+    }
+    if (data->nb_must_eat == 0)
+    {
+        ft_putstr_fd("Error: Number of meals must be positive\n", 2);
+        return(1);
+    }
+    return(0);
 }
 
 t_data *parse_args(int ac, char **av)
@@ -87,6 +64,11 @@ t_data *parse_args(int ac, char **av)
     if(data->nb_philo == -2 || data->time_to_die == -2 || data->time_to_eat == -2 || data->time_to_sleep == -2 || data->nb_must_eat == -2)
     {
         ft_putstr_fd("Error: one argument is too big\n", 2);
+        free(data);
+        return(NULL);
+    }
+    if(validate_values(data))
+    {
         free(data);
         return(NULL);
     }

@@ -33,8 +33,6 @@ int initiate_philo(t_data *data)
     int i;
 
     i = 0;
-    if(data->nb_philo <= 0)
-        return(1);
     if(allocate_philo_forks(data) != 0)
         return(1);
     pthread_mutex_init(&data->death_mutex, NULL);

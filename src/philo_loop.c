@@ -88,12 +88,10 @@ int	has_starved(t_philo *philo, t_data *data)
 
 void	*philo_checker(void *checker)
 {
-	t_philo *philo;
 	t_data *data;
 	int i;
 
-	philo = (t_philo *)checker;
-	data = philo->data;
+	data = (t_data *)checker;
 	while (1)
 	{
 		if (check_death(data))
@@ -101,11 +99,11 @@ void	*philo_checker(void *checker)
 		i = 0;
 		while (i < data->nb_philo)
 		{
-			if(has_starved(&philo[i], data))
+			if(has_starved(&data->philo[i], data))
                 return(NULL);
 			i++;
 		}
-		if (count_eat(data, philo))
+		if (count_eat(data, data->philo))
 			return (NULL);
 		usleep(1000);
 	}

@@ -30,11 +30,16 @@ typedef struct s_data
     int         time_to_sleep;
     int         nb_must_eat;
     int         someone_died;
+    int         print_once;
     int         finish_eat;
     int         full_meal;
-    long long   start;
+    long        start;
+    long        time_death;
+    int         death_id;
     pthread_mutex_t *forks;
     pthread_t   checker_thread;
+     pthread_mutex_t dprint_mutex;
+    pthread_mutex_t print_mutex;
     pthread_mutex_t death_mutex;
      pthread_mutex_t    full_meal_mutex; 
     t_philo     *philo;
@@ -42,7 +47,7 @@ typedef struct s_data
 
 
 void	ft_putstr_fd(char *s, int fd);
-long long get_time(void);
+long get_time(void);
 int count_eat(t_data *data, t_philo *philo); 
 t_data *parse_args(int ac, char **av);          
 int initiate_philo(t_data *data);  
@@ -52,5 +57,8 @@ void *philo_loop(void *arg);
 void *philo_checker(void *checker);
 int is_digit(char **av, int ac);
 int philo_atoi(char *str);
+void	print_status(t_data *data, t_philo *philo, char *status);
+void    philo_sleep(long ms);
+void	print_death(t_data *data, char *status);
 
 #endif

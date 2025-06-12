@@ -21,7 +21,7 @@ void	print_status(t_data *data, t_philo *philo, char *status)
 	pthread_mutex_lock(&data->death_mutex);
 	if (!data->someone_died)
 	{
-		printf("/%ld/ %d %s", curent_time, philo->id, status);
+		printf("%ldms %2d %s", curent_time, philo->id, status);
 	}
 	pthread_mutex_unlock(&data->death_mutex);
 	pthread_mutex_unlock(&data->print_mutex);

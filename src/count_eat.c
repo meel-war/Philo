@@ -35,7 +35,7 @@ int	count_eat(t_data *data, t_philo *philo)
 	if (data->full_meal == data->nb_philo)
 	{
 		pthread_mutex_unlock(&data->full_meal_mutex);
-		printf(("Tous les philosophers ont mange %dx\n"), data->nb_must_eat);
+		printf(("All the philosopher has eaten %d times each\n"), data->nb_must_eat);
 		pthread_mutex_lock(&data->death_mutex);
 		data->someone_died = 1;
 		pthread_mutex_unlock(&data->death_mutex);

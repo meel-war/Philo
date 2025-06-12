@@ -12,21 +12,21 @@
 
 #include "../include/philo.h"
 
-long long	get_time(void)
+long get_time(void)
 {
 	struct timeval	current_time;
-	long long int	time;
+	long int	time;
 
 	time = 0;
 	gettimeofday(&current_time, NULL);
-	time = (current_time.tv_sec * 1000LL) + (current_time.tv_usec / 1000);
+	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
 }
 
-void    philo_sleep(long long ms)
+void    philo_sleep(long ms)
 {
-    long long start;
-    long long passed;
+    long start;
+    long passed;
 
     start = get_time();
     while(1)

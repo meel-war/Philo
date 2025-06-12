@@ -50,6 +50,7 @@ int	initiate_philo(t_data *data)
 		return (1);
 	pthread_mutex_init(&data->death_mutex, NULL);
 	pthread_mutex_init(&data->full_meal_mutex, NULL);
+	pthread_mutex_init(&data->dprint_mutex, NULL);
     pthread_mutex_init(&data->print_mutex, NULL);
 	while (i < data->nb_philo)
 	{

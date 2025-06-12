@@ -34,11 +34,8 @@ typedef struct s_data
     int         finish_eat;
     int         full_meal;
     long        start;
-    long        time_death;
-    int         death_id;
     pthread_mutex_t *forks;
     pthread_t   checker_thread;
-     pthread_mutex_t dprint_mutex;
     pthread_mutex_t print_mutex;
     pthread_mutex_t death_mutex;
      pthread_mutex_t    full_meal_mutex; 

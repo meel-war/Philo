@@ -41,7 +41,6 @@ void	free_all(t_data *data)
 		pthread_mutex_destroy(&data->death_mutex);
 		pthread_mutex_destroy(&data->full_meal_mutex);
         pthread_mutex_destroy(&data->print_mutex);
-		pthread_mutex_destroy(&data->dprint_mutex);
 		free(data);
 	}
 }

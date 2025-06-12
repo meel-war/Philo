@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_eat.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: meel-war <meel-war@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 13:58:36 by meel-war          #+#    #+#             */
+/*   Updated: 2025/06/12 18:26:39 by meel-war         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 int	count_eat(t_data *data, t_philo *philo)
@@ -23,7 +35,7 @@ int	count_eat(t_data *data, t_philo *philo)
 	if (data->full_meal == data->nb_philo)
 	{
 		pthread_mutex_unlock(&data->full_meal_mutex);
-		printf(("Tous les philosophers ont mange %d\n"), data->nb_must_eat);
+		printf(("Tous les philosophers ont mange %dx\n"), data->nb_must_eat);
 		pthread_mutex_lock(&data->death_mutex);
 		data->someone_died = 1;
 		pthread_mutex_unlock(&data->death_mutex);

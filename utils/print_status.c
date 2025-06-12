@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meel-war <meel-war@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 13:59:16 by meel-war          #+#    #+#             */
-/*   Updated: 2025/06/12 13:59:17 by meel-war         ###   ########.fr       */
+/*   Created: 2025/06/12 16:39:54 by meel-war          #+#    #+#             */
+/*   Updated: 2025/06/12 18:04:47 by meel-war         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int ac, char **av)
+void	print_status(t_data *data, t_philo *philo, char *status)
 {
-	t_data	*data;
+	long	curent_time;
 
-	data = parse_args(ac, av);
-	if (!data)
-		return (1);
-	if (initiate_philo(data) != 0)
-		return (1);
-	if (link_thread(data))
-		return (1);
-	free_all(data);
-	return (0);
+	pthread_mutex_lock(&data->print_mutex);
+	curent_time = get_time() - data->start;
+	pthread_mutex_lock(&data->death_mutex);
+	if (!data->someone_died)
+	{
+		printf("/%ld/ %d %s", curent_time, philo->id, status);
+	}
+	pthread_mutex_unlock(&data->death_mutex);
+	pthread_mutex_unlock(&data->print_mutex);
 }
